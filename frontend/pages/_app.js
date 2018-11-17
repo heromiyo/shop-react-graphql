@@ -5,6 +5,9 @@ import withData from '../lib/withData'
 
 class Myapp extends App {
     // to get page numbers like myapp.com/sell?page=2
+    // also for exposing the id in the query as a prop
+    // example to edit an item we click and pass the id in the query
+    // in the next page we can receive that as props.query.id
     static async getInitialProps({ Component, ctx}) {
         let pageProps = {}
         if (Component.getInitialProps) {
