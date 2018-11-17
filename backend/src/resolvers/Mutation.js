@@ -26,6 +26,7 @@ const Mutations = {
     },
     async updateItem(parent, args, ctx, info) {
         // make copy of the data user passed in
+        console.log('args for update: ', args)
         const updates = { ...args }
         // remove the id because it doesnt need to be updated
         delete updates.id
