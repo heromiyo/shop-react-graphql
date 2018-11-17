@@ -19,7 +19,8 @@ const Query = {
     if fetching items from db does not require special logic ie authentication etc
     we can just grab the data directly from prisma by using forwardTo
      */
-    items: forwardTo('db')
+    items: forwardTo('db'),
+    item: forwardTo('db')
 }
 
 module.exports = Query
