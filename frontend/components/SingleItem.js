@@ -12,6 +12,15 @@ const SingleItemStyle = styled.div`
     grid-auto-columns: 1fr;
     grid-auto-flow: column;
     min-height: 800px;
+    img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    }
+    .details {
+    margin: 3rem;
+    font-size: 2rem;
+    }
 `
 
 const SINGLE_ITEM_QUERY = gql`
@@ -37,6 +46,10 @@ class SingleItem extends Component {
                             <title> Shop | { data.item.title }</title>
                         </Head>
                         <img src={ data.item.largeImage } alt={ data.item.title }/>
+                        <div className="details">
+                            <div>viewing { data.item.title}</div>
+                            <div>{ data.item.description }</div>
+                        </div>
                     </SingleItemStyle>
                 ) }
             </Query>
