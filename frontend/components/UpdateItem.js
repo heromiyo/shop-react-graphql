@@ -3,6 +3,7 @@ import  { Mutation, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import Form from './styles/Form'
 import Error from './ErrorMessage'
+
 const SINGLE_ITEM_QUERY = gql`
     query SINGLE_ITEM_QUERY (
         $id: ID!
@@ -38,11 +39,8 @@ const UPDATE_ITEM_MUTATION = gql`
 
 // render a form with title, description and price
 class UpdateItem extends Component {
-    state = {
-        title: '',
-        description: '',
-        price: 0
-    }
+    state = {}
+
 
     handleChange = async (event) => {
         event.preventDefault()
@@ -55,6 +53,8 @@ class UpdateItem extends Component {
     updateItem = async (e, updateItemMutationFunction) => {
         // we just pass the mutation function instead of handling the onSubmit inline
         e.preventDefault()
+        // what is in state at this point
+        console.log('state in updateItem: ', this.state)
         const res = await updateItemMutationFunction({
             // inject the update variables otherwise we wont have id
             variables: {
@@ -73,9 +73,13 @@ class UpdateItem extends Component {
                     if (loading) return <p>loading...</p>
                     if (!data.item) return <p>We did'nt find an item with id { this.props.id }</p>
                     return (
-                    <Mutation mutation={ UPDATE_ITEM_MUTATION } variables={ this.state }>
+                    <Mutation mutation={ UPDATE_ITEM_MUTATION } variables={{ id: this.props.id, ...this.state}} >
                         { (updateItem , { loading, error }) => (
-                            <Form onSubmit={ e => this.updateItem(e, updateItem) }>
+                            <Form onSubmit={ async (e) => {
+                                e.preventDefault()
+                                const res = await updateItem()
+                                console.log(res)
+                            } }>
                                 <Error error={ error }/>
                                 <fieldset>
                                     <label htmlFor="title">

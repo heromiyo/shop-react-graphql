@@ -41,6 +41,7 @@ class CreateItem extends Component {
             [name] : val
         })
     }
+
     uploadFile = async (e) => {
         const { files } = e.target
         const data = new FormData()
