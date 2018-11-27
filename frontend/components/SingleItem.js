@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
+import Head from 'next/head'
 
 const SingleItemStyle = styled.div`
     max-width: 1200px;
@@ -31,6 +32,10 @@ class SingleItem extends Component {
             }}>
                 {( { error, loading, data }) => (
                     <SingleItemStyle>
+
+                        <Head>
+                            <title> Shop | { data.item.title }</title>
+                        </Head>
                         <img src={ data.item.largeImage } alt={ data.item.title }/>
                     </SingleItemStyle>
                 ) }
